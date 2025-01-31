@@ -1,4 +1,6 @@
+require("dotenv").config();
 const express = require('express');
+const mongoose = require("mongoose");
 const {courseRouter} = require("./Routes/courseRoutes");
 const {userRouter} = require("./Routes/userRoutes");
 const {adminRouter} = require("./Routes/adminRoutes");
@@ -9,6 +11,13 @@ app.use("/admin", adminRouter);
 app.use("/course",courseRouter);
 
 
-app.listen(3000,()=>{
-    console.log("Server is running");
-});
+
+async function main() {
+    await mongoose.connect(process.env.MONGO_URI);
+    
+    app.listen(process.env.PORT, () => {
+        console.log(`Server is running on port ${process.env.PORT}`);
+    });
+}
+
+main()
