@@ -5,7 +5,7 @@ const {adminRouter} = require("./Routes/adminRoutes");
 const app = express();
 
 app.use("/user",userRouter);
-app.user("/admin", adminRouter);
+app.use("/admin", adminRouter);
 app.use("/course",courseRouter);
 
 
