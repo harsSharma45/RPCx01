@@ -3,13 +3,13 @@ const courseRouter = Router();
 
     courseRouter.post("/purchase",function(req,res){
         res.json({
-            messgae:"signup"
+            message:"signup"
         })
     })
     
     courseRouter.get("/preview",function(req,res){
         res.json({
-            messgae:"signup"
+            message:"signup"
         })
     })
 
