@@ -3,6 +3,9 @@ const { userModel } = require("../db");
 
 const userRouter = Router();
 
+const jwt = require("jsonwebtoken");
+const JWT_USER_PASSWORD = "abcdpqrs"
+
 userRouter.post("/signup", async function(req, res) {
     const { email, password, firstName, lastName } = req.body;
     // hash pwd
@@ -27,13 +30,25 @@ userRouter.post("/signin", async function(req, res) {
     const { email, password } = req.body;
 
     try {
-        const user = await userModel.findOne({ email: email, password: password });
+        const user = await userModel.findOne({
+            email: email,
+            password: password
+        });
         if (user) {
+            const token = jwt.sign({
+                id: user._id
+            }, JWT_USER_PASSWORD);
+
+                // session based 
+
             res.json({
-                message: "signin successful"
-            });
+                token : token
+            })
+
         } else {
-            res.status(401).json({ message: "Invalid credentials" });
+            res.status(401).json({
+                 message: "Invalid credentials"
+                });
         }
     } catch (error) {
         res.status(500).json({ error: error.message });
