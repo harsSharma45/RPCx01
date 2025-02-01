@@ -1,6 +1,4 @@
 require('dotenv').config()
-// Changed from process.env.MONGO_URL to process.env.MONGO_URI
-//console.log("MONGO_URI:", process.env.MONGO_URI);
 const express = require("express");
 const mongoose = require("mongoose");
 
