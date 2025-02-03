@@ -2,7 +2,7 @@ const {Router} = require("express");
 const adminRouter = Router();
 const {adminModel} = require("../db");
 const jwt = require("jsonwebtoken");
-const JWT_ADMIN_PASSWORD = "12121212"
+const {JWT_ADMIN_PASSWORD} = require("../config");
 
 adminRouter.post("/signup", async function(req,res){
     const { email, password, firstName, lastName } = req.body;
@@ -41,7 +41,7 @@ adminRouter.post("/signin", async function(req,res){
 
         } else {
             res.status(401).json({
-                 message: "Invalid credentials"
+                 message: "Invalid credentials" 
                 });
         }
     } catch (error) {
@@ -49,9 +49,23 @@ adminRouter.post("/signin", async function(req,res){
     }
 })
 
-adminRouter.post("/",function(req,res){
+adminRouter.post("/course", adminMiddleware, async function(req,res){
+
+    const adminID = req.userId;
+
+    const { title, description, imageUrl, price, creatorId} = req.body;
+
+    await courseModel.create({
+        title : title,
+        description : description,
+        imageUrl : imageUrl,
+        price : price,
+        creatorId : adminID
+    })
+
     res.json({
-        message:"signup"
+        message:"Course created",
+        courseId : courseModel._id
     }) 
 })
 
