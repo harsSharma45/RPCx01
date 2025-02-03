@@ -8,13 +8,19 @@ const {adminRouter} = require("./Routes/adminRoutes");
 const app = express();
 app.use(express.json()); // else req will be undefine 
 
+app.use((err, req, res, next) => {
+    if (err instanceof SyntaxError) {
+        return res.status(400).json({ error: "Invalid JSON format" });
+    }
+    next();
+});
+
 app.use("/user", userRouter);
 app.use("/admin", adminRouter);
 app.use("/course", courseRouter);
 
 async function main() {
-    
-    await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(process.env.MONGO_URI);
     app.listen(3000);
     console.log("listening on port 3000");
 }
