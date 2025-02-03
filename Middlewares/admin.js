@@ -1,24 +1,25 @@
 const { json } = require("express");
+const jwt = require("jsonwebtoken");
+const { JWT_ADMIN_PASSWORD } = require("../config");
 
-const { JWT_ADMIN_PASSWORD} = require("../config");
-
-function adminMiddleware(req,res,next){
-
+function adminMiddleware(req, res, next) {
     const token = req.headers.token;
-
-    const decoded = jwt.verify(token,JWT_ADMIN_PASSWORD);
-
-    if(decoded){
-        req.userID = decoded.id;
-        next()
+    if (!token) {
+        return res.status(401).json({ message: "Authorization token required" });
     }
-    else{
-        res.status(403).json({
-            messgae : "You aren't signed in"
-        })
+    try {
+        const decoded = jwt.verify(token, JWT_ADMIN_PASSWORD);
+        if (decoded) {
+            req.userId = decoded.id; 
+            next();
+        } else {
+            res.status(403).json({ message: "You aren't signed in" });
+        }
+    } catch (error) {
+        res.status(403).json({ message: "Invalid token", error: error.message });
     }
 }
 
 module.exports = {
-    userMiddleware : userMiddleware
-}
+    adminMiddleware: adminMiddleware
+};
