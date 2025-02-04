@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Course Platform</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>Course Platform</h1>
+	<section id="user-section">
+		<h2>User Signup</h2>
+		<form id="user-signup-form">
+			<input type="email" name="email" placeholder="Email" required>
+			<input type="password" name="password" placeholder="Password" required>
+			<input type="text" name="firstName" placeholder="First Name" required>
+			<input type="text" name="lastName" placeholder="Last Name" required>
+			<button type="submit">Sign Up</button>
+		</form>
+		<h2>User Signin</h2>
+		<form id="user-signin-form">
+			<input type="email" name="email" placeholder="Email" required>
+			<input type="password" name="password" placeholder="Password" required>
+			<button type="submit">Sign In</button>
+		</form>
+		<h2>View Courses</h2>
+		<button id="load-courses-btn">Load Courses</button>
+		<div id="courses-list"></div>
+		<h2>Purchase Course</h2>
+		<form id="purchase-form">
+			<input type="text" name="courseId" placeholder="Course ID" required>
+			<button type="submit">Purchase</button>
+		</form>
+	</section>
+	<section id="admin-section">
+		<h2>Admin Signup</h2>
+		<form id="admin-signup-form">
+			<input type="email" name="email" placeholder="Email" required>
+			<input type="password" name="password" placeholder="Password" required>
+			<input type="text" name="firstName" placeholder="First Name" required>
+			<input type="text" name="lastName" placeholder="Last Name" required>
+			<button type="submit">Sign Up</button>
+		</form>
+		<h2>Admin Signin</h2>
+		<form id="admin-signin-form">
+			<input type="email" name="email" placeholder="Email" required>
+			<input type="password" name="password" placeholder="Password" required>
+			<button type="submit">Sign In</button>
+		</form>
+		<h2>Create Course</h2>
+		<form id="create-course-form">
+			<input type="text" name="title" placeholder="Title" required>
+			<input type="text" name="description" placeholder="Description" required>
+			<input type="text" name="imageUrl" placeholder="Image URL" required>
+			<input type="number" name="price" placeholder="Price" required>
+			<button type="submit">Create Course</button>
+		</form>
+	</section>
+	<script src="script.js"></script>
+</body>
+</html>
